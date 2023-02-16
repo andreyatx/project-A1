@@ -1,8 +1,9 @@
+import { Task } from './components/Task';
+
 export const App = () => {
 	return (
-		<div className="App">
-			<button className="btn btn-primary">Button</button>
-			<button className="btn btn-primary">Button</button>
+		<div className="h-screen w-screen bg-slate-300">
+			<Task />
 		</div>
 	);
 };
