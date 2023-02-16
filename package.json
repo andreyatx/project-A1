@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"@headlessui/react": "1.7.11",
 		"@heroicons/react": "2.0.15",
+		"@reduxjs/toolkit": "1.9.2",
 		"@types/react": "18.0.27",
 		"@types/react-dom": "18.0.10",
 		"@typescript-eslint/eslint-plugin": "5.51.0",
@@ -30,6 +31,7 @@
 		"eslint-plugin-react": "7.32.2",
 		"eslint-plugin-simple-import-sort": "10.0.0",
 		"postcss": "8.4.21",
+		"react-redux": "8.0.5",
 		"stylelint": "15.1.0",
 		"stylelint-config-standard": "30.0.1",
 		"tailwindcss": "3.2.6",
