@@ -1,22 +1,27 @@
 import { EllipsisHorizontalIcon, PlusIcon } from '@heroicons/react/24/solid';
+import { type FC, type ReactElement } from 'react';
 
-import { Task } from './Task';
+import { Task, type TaskProps } from './Task';
 
-const arr = [1, 2, 3, 4];
+type CategoryInfoProps = {
+	icon: ReactElement;
+	title: string;
+	taskCount: number;
+};
 
-const CategoryInfo = () => {
+const CategoryInfo: FC<CategoryInfoProps> = ({ icon, title, taskCount }) => {
 	return (
 		<div className="flex flex-row justify-between items-center">
-			<span>0</span>
-			<span className="ml-2">BACKLOG</span>
-			<span className="ml-2">8</span>
+			<span>{icon}</span>
+			<span className="ml-2">{title}</span>
+			<span className="ml-2 text-slate-400">{taskCount}</span>
 		</div>
 	);
 };
 
-const CategoryActions = () => {
+const CategoryActions: FC = () => {
 	return (
-		<div className="items-center">
+		<div className="flex items-center">
 			<button className="max-w-fit bg-transparent rounded-md hover:bg-slate-400">
 				<PlusIcon className="h-5 w-5 text-white" />
 			</button>
@@ -27,16 +32,22 @@ const CategoryActions = () => {
 	);
 };
 
-export const Category = () => {
+type CategoryProps = {
+	icon: ReactElement;
+	title: string;
+	taskList: TaskProps[];
+};
+
+export const Category: FC<CategoryProps> = ({ icon, title, taskList }) => {
 	return (
 		<div className="w-80">
 			<div className="flex justify-between items-center mb-2">
-				<CategoryInfo />
+				<CategoryInfo icon={icon} title={title} taskCount={taskList.length} />
 				<CategoryActions />
 			</div>
 			<div className="taskListContainer">
-				{arr.map(task => (
-					<Task key={task} />
+				{taskList.map(task => (
+					<Task key={task.id} {...task} />
 				))}
 			</div>
 		</div>

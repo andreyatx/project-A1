@@ -7,7 +7,7 @@ const initialState = {
 	categories: [
 		{
 			id: 1,
-			status: 'Backlog',
+			title: 'Backlog',
 			icon: <RectangleStackIcon className="h-4 w-4 text-gray-400" />,
 			taskList: [
 				{
@@ -16,7 +16,7 @@ const initialState = {
 					title: 'Task Title',
 					priority: 'priority',
 					tags: 'tags',
-					avatar: 'avatar',
+					avatar: '',
 				},
 				{
 					id: 2,
@@ -24,7 +24,7 @@ const initialState = {
 					title: 'Task Title',
 					priority: 'priority',
 					tags: 'tags',
-					avatar: 'avatar',
+					avatar: '',
 				},
 				{
 					id: 3,
@@ -32,21 +32,47 @@ const initialState = {
 					title: 'Task Title',
 					priority: 'priority',
 					tags: 'tags',
-					avatar: 'avatar',
+					avatar: '',
 				},
 			],
 		},
 		{
 			id: 2,
-			status: 'In Progress',
+			title: 'In Progress',
 			icon: <ArrowRightCircleIcon className="h-4 w-4 text-yellow-300" />,
-			taskList: [],
+			taskList: [
+				{
+					id: 1,
+					taskId: 'fh12',
+					title: 'Task Title',
+					priority: 'priority',
+					tags: 'tags',
+					avatar: '',
+				},
+				{
+					id: 2,
+					taskId: 'fh12',
+					title: 'Task Title',
+					priority: 'priority',
+					tags: 'tags',
+					avatar: '',
+				},
+			],
 		},
 		{
 			id: 3,
-			status: 'Done',
+			title: 'Done',
 			icon: <CheckCircleIcon className="h-4 w-4 text-green-500" />,
-			taskList: [],
+			taskList: [
+				{
+					id: 1,
+					taskId: 'fh12',
+					title: 'Task Title',
+					priority: 'priority',
+					tags: 'tags',
+					avatar: '',
+				},
+			],
 		},
 	],
 };
