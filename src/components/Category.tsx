@@ -3,18 +3,18 @@ import { type FC, type ReactElement } from 'react';
 
 import { Task, type TaskProps } from './Task';
 
-type CategoryInfoProps = {
+type CategoryProps = {
 	icon: ReactElement;
 	title: string;
-	taskCount: number;
+	taskList: TaskProps[];
 };
 
-const CategoryInfo: FC<CategoryInfoProps> = ({ icon, title, taskCount }) => {
+const CategoryInfo: FC<CategoryProps> = ({ icon, title, taskList }) => {
 	return (
 		<div className="flex flex-row justify-between items-center">
 			<span>{icon}</span>
 			<span className="ml-2">{title}</span>
-			<span className="ml-2 text-slate-400">{taskCount}</span>
+			<span className="ml-2 text-slate-400">{taskList.length}</span>
 		</div>
 	);
 };
@@ -32,17 +32,11 @@ const CategoryActions: FC = () => {
 	);
 };
 
-type CategoryProps = {
-	icon: ReactElement;
-	title: string;
-	taskList: TaskProps[];
-};
-
 export const Category: FC<CategoryProps> = ({ icon, title, taskList }) => {
 	return (
 		<div className="w-80">
 			<div className="flex justify-between items-center mb-2">
-				<CategoryInfo icon={icon} title={title} taskCount={taskList.length} />
+				<CategoryInfo icon={icon} title={title} taskList={taskList} />
 				<CategoryActions />
 			</div>
 			<div className="taskListContainer">
