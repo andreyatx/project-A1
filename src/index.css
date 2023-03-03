@@ -39,6 +39,19 @@ h1 {
 	line-height: 1.1;
 }
 
+.select,
+.textarea,
+.input {
+	background-color: #213547;
+}
+.input:focus {
+	border: none;
+}
+
+.label-text {
+	color: white;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

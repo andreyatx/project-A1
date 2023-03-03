@@ -3,30 +3,18 @@ import { Dialog, Transition } from '@headlessui/react';
 
 type ModalProps = {
 	children?: ReactNode;
+	openModal?: () => void;
 };
 
-export const Modal: FC<ModalProps> = ({ children }) => {
+export const Modal: FC<ModalProps> = ({ children, openModal }) => {
 	let [isOpen, setIsOpen] = useState(true);
 
 	const closeModal = () => {
 		setIsOpen(false);
 	};
 
-	const openModal = () => {
-		setIsOpen(true);
-	};
-
 	return (
 		<>
-			<div className="fixed inset-0 flex items-center justify-center">
-				<button
-					type="button"
-					onClick={openModal}
-					className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-					Open dialog
-				</button>
-			</div>
-
 			<Transition appear show={isOpen} as={Fragment}>
 				<Dialog as="div" className="relative z-10" onClose={closeModal}>
 					<Transition.Child
@@ -50,7 +38,7 @@ export const Modal: FC<ModalProps> = ({ children }) => {
 								leave="ease-in duration-200"
 								leaveFrom="opacity-100 scale-100"
 								leaveTo="opacity-0 scale-95">
-								<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+								<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-neutral p-6 text-left align-middle shadow-xl transition-all">
 									{children}
 								</Dialog.Panel>
 							</Transition.Child>

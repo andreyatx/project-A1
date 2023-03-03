@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 
 import { Dashboard } from './components/Dashboard';
+import { NewTask } from './components/NewTask';
 
 export const App: FC = () => {
 	return (

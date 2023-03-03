@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { categoryReducer } from './features/category/categorySlice';
+import { dashboardReducer } from './features/dashboard/dashboardSlice';
 
 export const store = configureStore({
 	reducer: {
-		category: categoryReducer,
+		dashboard: dashboardReducer,
 	},
 });
 
