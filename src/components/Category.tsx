@@ -23,13 +23,9 @@ const CategoryInfo: FC<Omit<CategoryProps, 'id' | 'taskList'>> = ({ iconName, ti
 };
 
 const CategoryActions: FC = () => {
-	const clickHandler = () => {
-		console.log('open modal');
-	};
-
 	return (
 		<div className="flex items-center">
-			<button onClick={clickHandler} className="max-w-fit bg-transparent rounded-md hover:bg-slate-400">
+			<button className="max-w-fit bg-transparent rounded-md hover:bg-slate-400">
 				<PlusIcon className="h-5 w-5 text-white" />
 			</button>
 			<button className="max-w-fit bg-transparent rounded-md hover:bg-slate-400 ml-2">
@@ -48,9 +44,6 @@ export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) =
 			</div>
 			<div className="taskListContainer">
 				{taskList.map(task => {
-					console.log('cat id', id);
-					console.log('task cat id', task.category_id);
-
 					if (task.category_id === id) {
 						return <Task key={task.id} {...task} />;
 					}

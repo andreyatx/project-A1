@@ -35,7 +35,6 @@ export const NewTask: FC = () => {
 			...newTask,
 			[name]: value,
 		});
-		console.log(newTask);
 	};
 
 	return (

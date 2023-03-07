@@ -1,5 +1,7 @@
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
 import { type FC } from 'react';
+import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
+import { useAppDispatch } from '../store/hooks';
 
 import { Avatar } from './Avatar';
 
@@ -13,9 +15,11 @@ export type TaskProps = {
 	avatar?: string;
 };
 
-export const Task: FC<TaskProps> = ({ title, priority, tags, avatar }) => {
-	const deleteHandler = () => {
+export const Task: FC<TaskProps> = ({ title, priority, tags, avatar, id: taskId }) => {
+	const dispatch = useAppDispatch();
+	const deleteHandler = (taskId: string) => {
 		console.log('deleted');
+		dispatch(dashboardThunks.deleteTask(taskId));
 	};
 
 	return (
@@ -41,7 +45,7 @@ export const Task: FC<TaskProps> = ({ title, priority, tags, avatar }) => {
 							<button className="hover:bg-slate-400">Редактировать</button>
 						</li>
 						<li>
-							<button onClick={deleteHandler} className="hover:bg-slate-400">
+							<button onClick={() => deleteHandler(taskId)} className="hover:bg-slate-400 text-red-600">
 								Удалить
 							</button>
 						</li>
