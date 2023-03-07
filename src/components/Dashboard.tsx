@@ -1,12 +1,31 @@
-import { type FC } from 'react';
+import { collection, DocumentData, onSnapshot, query } from 'firebase/firestore';
+import { useEffect, useState, type FC } from 'react';
+import { db } from '../firebase';
 
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Category } from './Category';
 import { NewTask } from './NewTask';
+import { TaskProps } from './Task';
 
 export const Dashboard: FC = () => {
 	const { categories } = useAppSelector(dashboardSelectors.all);
+	const [taskList, setTaskList] = useState<TaskProps[]>([]);
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		const taskListQuery = query(collection(db, 'TASK_LIST'));
+
+		onSnapshot(taskListQuery, querySnapshot => {
+			const result: DocumentData[] = [];
+
+			querySnapshot.forEach(snapshot => {
+				result.push(snapshot.data());
+			});
+
+			setTaskList(result as TaskProps[]);
+		});
+	}, []);
 
 	return (
 		<>
@@ -14,7 +33,7 @@ export const Dashboard: FC = () => {
 				<NewTask />
 				<div className="flex flex-row space-x-8 ">
 					{categories.map(category => (
-						<Category key={category.id} {...category} />
+						<Category key={category.id} {...category} taskList={taskList} />
 					))}
 				</div>
 			</div>

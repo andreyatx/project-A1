@@ -1,19 +1,22 @@
 import { EllipsisHorizontalIcon, PlusIcon } from '@heroicons/react/24/solid';
-import { type FC, type ReactElement } from 'react';
-import { NewTask } from './NewTask';
+import { type FC } from 'react';
+import { Icon, IconNames } from './Icon';
 
 import { Task, type TaskProps } from './Task';
 
-type CategoryProps = {
-	icon: ReactElement;
+export type CategoryProps = {
+	id: number;
+	iconName: string;
 	title: string;
-	taskList?: TaskProps[];
+	taskList: TaskProps[];
 };
 
-const CategoryInfo: FC<CategoryProps> = ({ icon, title }) => {
+const CategoryInfo: FC<Omit<CategoryProps, 'id' | 'taskList'>> = ({ iconName, title }) => {
 	return (
 		<div className="flex flex-row justify-between items-center">
-			<span>{icon}</span>
+			<span>
+				<Icon iconName={iconName} />
+			</span>
 			<span className="ml-2">{title}</span>
 		</div>
 	);
@@ -36,14 +39,23 @@ const CategoryActions: FC = () => {
 	);
 };
 
-export const Category: FC<CategoryProps> = ({ icon, title }) => {
+export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) => {
 	return (
 		<div className="w-80">
 			<div className="flex justify-between items-center mb-2">
-				<CategoryInfo icon={icon} title={title} />
+				<CategoryInfo iconName={iconName} title={title} />
 				<CategoryActions />
 			</div>
-			<div className="taskListContainer"></div>
+			<div className="taskListContainer">
+				{taskList.map(task => {
+					console.log('cat id', id, title);
+					console.log('task cat id', task.category_id);
+
+					if (Number(task.category_id) === id) {
+						return <Task key={task.id} {...task} />;
+					}
+				})}
+			</div>
 		</div>
 	);
 };
