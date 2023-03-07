@@ -3,12 +3,12 @@ import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useAppDispatch } from '../store/hooks';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 
-export type NewTaskProps = { title: string; description: string; category_id: number; priority: number };
+export type NewTaskProps = { title: string; description: string; category_id: string; priority: number };
 
 const initalValues: NewTaskProps = {
 	title: '',
 	description: '',
-	category_id: 1,
+	category_id: '1',
 	priority: 0,
 };
 

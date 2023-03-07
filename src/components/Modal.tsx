@@ -1,23 +1,25 @@
 import { FC, Fragment, ReactNode, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { UIActions, UISelectors } from '../store/features/UI/UISlice';
 
 type ModalProps = {
 	children?: ReactNode;
-	openModal?: () => void;
 };
 
-export const Modal: FC<ModalProps> = ({ children, openModal }) => {
-	let [isOpen, setIsOpen] = useState(true);
+export const Modal: FC<ModalProps> = ({ children }) => {
+	const { isModalOpen } = useAppSelector(UISelectors.all);
+	const dispatch = useAppDispatch();
 
-	const closeModal = () => {
-		setIsOpen(false);
+	const closeModalHandler = () => {
+		dispatch(UIActions.closeModal());
 	};
 
 	return (
 		<>
-			<Transition appear show={isOpen} as={Fragment}>
-				<Dialog as="div" className="relative z-10" onClose={closeModal}>
+			<Transition appear show={isModalOpen} as={Fragment}>
+				<Dialog as="div" className="relative z-10" onClose={closeModalHandler}>
 					<Transition.Child
 						as={Fragment}
 						enter="ease-out duration-300"
@@ -42,7 +44,7 @@ export const Modal: FC<ModalProps> = ({ children, openModal }) => {
 								<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-neutral p-6 text-left align-middle shadow-xl transition-all">
 									<button
 										tabIndex={999}
-										onClick={closeModal}
+										onClick={closeModalHandler}
 										className="btn btn-square btn-sm btn-outline bg-slate-800 flex ml-auto">
 										<XMarkIcon className="h-6 w-6 text-white" />
 									</button>

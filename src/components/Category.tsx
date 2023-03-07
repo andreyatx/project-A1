@@ -1,11 +1,11 @@
 import { EllipsisHorizontalIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { type FC } from 'react';
-import { Icon, IconNames } from './Icon';
+import { Icon } from './Icon';
 
 import { Task, type TaskProps } from './Task';
 
 export type CategoryProps = {
-	id: number;
+	id: string;
 	iconName: string;
 	title: string;
 	taskList: TaskProps[];
@@ -48,10 +48,10 @@ export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) =
 			</div>
 			<div className="taskListContainer">
 				{taskList.map(task => {
-					console.log('cat id', id, title);
+					console.log('cat id', id);
 					console.log('task cat id', task.category_id);
 
-					if (Number(task.category_id) === id) {
+					if (task.category_id === id) {
 						return <Task key={task.id} {...task} />;
 					}
 				})}

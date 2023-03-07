@@ -14,17 +14,17 @@ type DashboardStateType = {
 const initialState = {
 	categories: [
 		{
-			id: 1,
+			id: '1',
 			title: 'Backlog',
 			iconName: IconNames.Backlog,
 		},
 		{
-			id: 2,
+			id: '2',
 			title: 'In Progress',
 			iconName: IconNames.InProgress,
 		},
 		{
-			id: 3,
+			id: '3',
 			title: 'Done',
 			iconName: IconNames.Done,
 		},

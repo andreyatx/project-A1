@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { dashboardReducer } from './features/dashboard/dashboardSlice';
+import { UIReducer } from './features/UI/UISlice';
 
 export const store = configureStore({
 	reducer: {
 		dashboard: dashboardReducer,
+		UI: UIReducer,
 	},
 });
 

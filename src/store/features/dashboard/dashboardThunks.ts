@@ -10,6 +10,8 @@ export const addTask = createAsyncThunk('dashboard/add-task', async (data: NewTa
 	});
 });
 
+export const deleteTask = createAsyncThunk('dashboard/delete-task', async () => {});
+
 export const getTaskList = createAsyncThunk('dashboard/get-task-list', async () => {
 	const data = await getDocs(collection(db, 'TASK_LIST'));
 	const result: DocumentData[] = [];

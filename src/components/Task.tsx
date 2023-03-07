@@ -1,10 +1,11 @@
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
 import { type FC } from 'react';
 
 import { Avatar } from './Avatar';
 
 export type TaskProps = {
-	id: number;
-	category_id: number;
+	id: string;
+	category_id: string;
 	title: string;
 	description: string;
 	priority: string;
@@ -13,6 +14,10 @@ export type TaskProps = {
 };
 
 export const Task: FC<TaskProps> = ({ title, priority, tags, avatar }) => {
+	const deleteHandler = () => {
+		console.log('deleted');
+	};
+
 	return (
 		<div className="card w-80 h-24 bg-neutral rounded-sm flex flex-row p-2 mb-2">
 			<div className="left-block flex flex-col">
@@ -24,8 +29,24 @@ export const Task: FC<TaskProps> = ({ title, priority, tags, avatar }) => {
 				</div>
 			</div>
 
-			<div className="right-block ml-auto">
+			<div className="right-block ml-auto flex flex-col justify-between">
 				<Avatar avatar={avatar} />
+
+				<div className="flex dropdown dropdown-end">
+					<button className="max-w-fit bg-transparent rounded-md focus:bg-slate-400 hover:bg-slate-400 ml-2">
+						<EllipsisHorizontalIcon className="h-6 w-6 text-white self-center" />
+					</button>
+					<ul className="dropdown-content menu shadow bg-neutral rounded-box mt-6">
+						<li>
+							<button className="hover:bg-slate-400">Редактировать</button>
+						</li>
+						<li>
+							<button onClick={deleteHandler} className="hover:bg-slate-400">
+								Удалить
+							</button>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	);
