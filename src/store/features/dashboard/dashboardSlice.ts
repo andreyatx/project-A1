@@ -8,7 +8,6 @@ import { CategoryProps } from '../../../components/Category';
 
 type DashboardStateType = {
 	categories: CategoryProps[];
-	taskList: TaskProps[];
 };
 
 const initialState = {
@@ -17,19 +16,21 @@ const initialState = {
 			id: '1',
 			title: 'Backlog',
 			iconName: IconNames.Backlog,
+			taskList: [],
 		},
 		{
 			id: '2',
 			title: 'In Progress',
 			iconName: IconNames.InProgress,
+			taskList: [],
 		},
 		{
 			id: '3',
 			title: 'Done',
 			iconName: IconNames.Done,
+			taskList: [],
 		},
 	],
-	taskList: [],
 } as unknown as DashboardStateType;
 
 export const dashboardSlice = createSlice({
@@ -37,8 +38,8 @@ export const dashboardSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers(builder) {
-		builder.addCase(dashboardThunks.getTaskList.fulfilled, (state, { payload }) => {
-			state.taskList = payload;
+		builder.addCase(dashboardThunks.getCategoryList.fulfilled, (state, { payload }) => {
+			state.categories = payload;
 		});
 	},
 });

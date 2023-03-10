@@ -1,7 +1,8 @@
 import { Modal } from './Modal';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
+import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 
 export type NewTaskProps = { title: string; description: string; category_id: string; priority: number };
 
@@ -19,6 +20,7 @@ enum Priority {
 }
 
 export const NewTask: FC = () => {
+	const { categories } = useAppSelector(dashboardSelectors.all);
 	const dispatch = useAppDispatch();
 	const [newTask, setNewTask] = useState<NewTaskProps>(initalValues);
 
@@ -71,9 +73,16 @@ export const NewTask: FC = () => {
 						value={newTask.category_id}
 						onChange={handleInputChange}
 						name="category_id">
-						<option value={1}>Backlog</option>
+						{categories.map(category => {
+							return (
+								<option key={category.id} value={category.id}>
+									{category.title}
+								</option>
+							);
+						})}
+						{/* <option value={1}>Backlog</option>
 						<option value={2}>In Progress</option>
-						<option value={3}>Done</option>
+						<option value={3}>Done</option> */}
 					</select>
 				</div>
 

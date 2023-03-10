@@ -3,6 +3,7 @@ import { useEffect, useState, type FC } from 'react';
 import { db } from '../firebase';
 
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
+import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { UIActions } from '../store/features/UI/UISlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Category } from './Category';
@@ -19,17 +20,18 @@ export const Dashboard: FC = () => {
 	};
 
 	useEffect(() => {
-		const taskListQuery = query(collection(db, 'TASK_LIST'));
+		dispatch(dashboardThunks.getCategoryList());
+		// const taskListQuery = query(collection(db, 'TASK_LIST'));
 
-		onSnapshot(taskListQuery, querySnapshot => {
-			const result: DocumentData[] = [];
+		// onSnapshot(taskListQuery, querySnapshot => {
+		// 	const result: DocumentData[] = [];
 
-			querySnapshot.forEach(doc => {
-				result.push({ ...doc.data(), id: doc.id });
-			});
+		// 	querySnapshot.forEach(doc => {
+		// 		result.push({ ...doc.data(), id: doc.id });
+		// 	});
 
-			setTaskList(result as TaskProps[]);
-		});
+		// 	setTaskList(result as TaskProps[]);
+		// });
 	}, []);
 
 	return (
