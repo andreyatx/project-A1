@@ -1,8 +1,9 @@
-import { FC, Fragment, ReactNode, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { type FC, Fragment, type ReactNode } from 'react';
+
 import { UIActions, UISelectors } from '../store/features/UI/UISlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 type ModalProps = {
 	children?: ReactNode;

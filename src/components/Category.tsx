@@ -1,14 +1,15 @@
 import { EllipsisHorizontalIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { type FC } from 'react';
-import { Icon } from './Icon';
 
-import { Task, type TaskProps } from './Task';
+import { Icon } from './Icon';
+import { type TaskItem } from './Task';
+import { TaskList } from './TaskList';
 
 export type CategoryProps = {
 	id: string;
 	iconName: string;
 	title: string;
-	taskList: TaskProps[];
+	taskList: TaskItem[];
 };
 
 const CategoryInfo: FC<Omit<CategoryProps, 'id' | 'taskList'>> = ({ iconName, title }) => {
@@ -35,7 +36,7 @@ const CategoryActions: FC = () => {
 	);
 };
 
-export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) => {
+export const Category: FC<CategoryProps> = ({ iconName, title, taskList }) => {
 	return (
 		<div className="w-80">
 			<div className="flex justify-between items-center mb-2">
@@ -43,11 +44,7 @@ export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) =
 				<CategoryActions />
 			</div>
 			<div className="taskListContainer">
-				{taskList.map(task => {
-					if (task.category_id === id) {
-						return <Task key={task.id} {...task} />;
-					}
-				})}
+				<TaskList taskList={taskList} />
 			</div>
 		</div>
 	);

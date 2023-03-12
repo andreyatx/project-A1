@@ -1,16 +1,15 @@
-import { Modal } from './Modal';
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
+import { type ChangeEvent, type FC, type FormEvent, useState } from 'react';
+
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
+import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { Modal } from './Modal';
 
-export type NewTaskProps = { title: string; description: string; category_id: string; priority: number };
-
-const initalValues: NewTaskProps = {
-	title: '',
-	description: '',
-	category_id: '1',
-	priority: 0,
+export type NewTaskProps = {
+	title: string;
+	description: string;
+	categoryId: string;
+	priority: number;
 };
 
 enum Priority {
@@ -21,6 +20,14 @@ enum Priority {
 
 export const NewTask: FC = () => {
 	const { categories } = useAppSelector(dashboardSelectors.all);
+
+	const initalValues: NewTaskProps = {
+		title: '',
+		description: '',
+		categoryId: categories[0].id, //First category id
+		priority: 0,
+	};
+
 	const dispatch = useAppDispatch();
 	const [newTask, setNewTask] = useState<NewTaskProps>(initalValues);
 
@@ -70,9 +77,9 @@ export const NewTask: FC = () => {
 						tabIndex={3}
 						className="select w-full"
 						required
-						value={newTask.category_id}
+						value={newTask.categoryId}
 						onChange={handleInputChange}
-						name="category_id">
+						name="categoryId">
 						{categories.map(category => {
 							return (
 								<option key={category.id} value={category.id}>
@@ -80,9 +87,6 @@ export const NewTask: FC = () => {
 								</option>
 							);
 						})}
-						{/* <option value={1}>Backlog</option>
-						<option value={2}>In Progress</option>
-						<option value={3}>Done</option> */}
 					</select>
 				</div>
 

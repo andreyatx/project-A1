@@ -1,13 +1,13 @@
-import { TaskProps } from './../../../components/Task';
-import { dashboardThunks } from './dashboardThunks';
 import { createSlice } from '@reduxjs/toolkit';
-import { IconNames } from '../../../components/Icon';
 
+import { type CategoryProps } from '../../../components/Category';
+import { IconNames } from '../../../components/Icon';
 import { type RootState } from '../../store';
-import { CategoryProps } from '../../../components/Category';
+import { dashboardThunks } from './dashboardThunks';
 
 type DashboardStateType = {
 	categories: CategoryProps[];
+	isLoading: boolean;
 };
 
 const initialState = {
@@ -31,6 +31,7 @@ const initialState = {
 			taskList: [],
 		},
 	],
+	isLoading: false,
 } as unknown as DashboardStateType;
 
 export const dashboardSlice = createSlice({
@@ -38,8 +39,13 @@ export const dashboardSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers(builder) {
+		builder.addCase(dashboardThunks.getCategoryList.pending, state => {
+			state.isLoading = true;
+		});
+
 		builder.addCase(dashboardThunks.getCategoryList.fulfilled, (state, { payload }) => {
 			state.categories = payload;
+			state.isLoading = false;
 		});
 	},
 });

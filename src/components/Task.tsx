@@ -1,13 +1,13 @@
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
 import { type FC } from 'react';
+
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { useAppDispatch } from '../store/hooks';
-
 import { Avatar } from './Avatar';
 
-export type TaskProps = {
+export type TaskItem = {
 	id: string;
-	category_id: string;
+	categoryId: string;
 	title: string;
 	description: string;
 	priority: string;
@@ -15,26 +15,30 @@ export type TaskProps = {
 	avatar?: string;
 };
 
-export const Task: FC<TaskProps> = ({ title, priority, tags, avatar, id: taskId }) => {
+export type TaskProps = {
+	task: TaskItem;
+	index: number; // Index of task in the array
+};
+
+export const Task: FC<TaskProps> = ({ task }) => {
 	const dispatch = useAppDispatch();
-	const deleteHandler = (taskId: string) => {
-		console.log('deleted');
-		dispatch(dashboardThunks.deleteTask(taskId));
+	const deleteHandler = (categoryId: string, task: TaskItem) => {
+		dispatch(dashboardThunks.deleteTask({ categoryId, task }));
 	};
 
 	return (
 		<div className="card w-80 h-24 bg-neutral rounded-sm flex flex-row p-2 mb-2">
 			<div className="left-block flex flex-col">
-				<div className="mb-2">{title ?? 'Название задачи'}</div>
+				<div className="mb-2">{task.title ?? 'Название задачи'}</div>
 
 				<div className="flex flex-row mt-auto">
-					<div className="text-sm text-slate-300">Приоритет {priority ?? 'Priority'}</div>
-					<div className="text-sm text-slate-300 ml-2">{tags ?? 'Tags'}</div>
+					<div className="text-sm text-slate-300">Приоритет {task.priority ?? 'Priority'}</div>
+					<div className="text-sm text-slate-300 ml-2">{task.tags ?? 'Tags'}</div>
 				</div>
 			</div>
 
 			<div className="right-block ml-auto flex flex-col justify-between">
-				<Avatar avatar={avatar} />
+				<Avatar avatar={task.avatar} />
 
 				<div className="flex dropdown dropdown-end">
 					<button className="max-w-fit bg-transparent rounded-md focus:bg-slate-400 hover:bg-slate-400 ml-2">
@@ -45,7 +49,7 @@ export const Task: FC<TaskProps> = ({ title, priority, tags, avatar, id: taskId 
 							<button className="hover:bg-slate-400">Редактировать</button>
 						</li>
 						<li>
-							<button onClick={() => deleteHandler(taskId)} className="hover:bg-slate-400 text-red-600">
+							<button onClick={() => deleteHandler(task.categoryId, task)} className="hover:bg-slate-400 text-red-600">
 								Удалить
 							</button>
 						</li>

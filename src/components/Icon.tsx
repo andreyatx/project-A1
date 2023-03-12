@@ -1,5 +1,5 @@
 import { ArrowRightCircleIcon, CheckCircleIcon, RectangleStackIcon } from '@heroicons/react/24/solid';
-import { FC, ReactElement } from 'react';
+import { type FC, type ReactElement } from 'react';
 
 export enum IconNames {
 	Backlog = 'BACKLOG',

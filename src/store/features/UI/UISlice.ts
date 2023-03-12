@@ -1,5 +1,6 @@
-import { RootState } from './../../store';
 import { createSlice } from '@reduxjs/toolkit';
+
+import { type RootState } from './../../store';
 
 const initialState = {
 	isModalOpen: false,

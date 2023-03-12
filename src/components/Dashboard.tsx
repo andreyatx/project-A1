@@ -1,18 +1,17 @@
-import { collection, DocumentData, onSnapshot, query } from 'firebase/firestore';
-import { useEffect, useState, type FC } from 'react';
-import { db } from '../firebase';
+import { collection, type DocumentData, limit, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { type FC,useEffect, useState } from 'react';
 
+import { db } from '../firebase';
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { UIActions } from '../store/features/UI/UISlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { Category } from './Category';
+import { Category, type CategoryProps } from './Category';
 import { NewTask } from './NewTask';
-import { TaskProps } from './Task';
 
 export const Dashboard: FC = () => {
-	const { categories } = useAppSelector(dashboardSelectors.all);
-	const [taskList, setTaskList] = useState<TaskProps[]>([]);
+	const { isLoading } = useAppSelector(dashboardSelectors.all);
+	const [categoryList, setCategoryList] = useState<CategoryProps[]>([]);
 	const dispatch = useAppDispatch();
 
 	const openModalHandler = () => {
@@ -20,19 +19,23 @@ export const Dashboard: FC = () => {
 	};
 
 	useEffect(() => {
+		// Get categories once to set store state
 		dispatch(dashboardThunks.getCategoryList());
-		// const taskListQuery = query(collection(db, 'TASK_LIST'));
 
-		// onSnapshot(taskListQuery, querySnapshot => {
-		// 	const result: DocumentData[] = [];
-
-		// 	querySnapshot.forEach(doc => {
-		// 		result.push({ ...doc.data(), id: doc.id });
-		// 	});
-
-		// 	setTaskList(result as TaskProps[]);
-		// });
+		// Get categories real-time updates
+		const categoryListQuery = query(collection(db, 'CATEGORY_LIST'), orderBy('order'), limit(99));
+		onSnapshot(categoryListQuery, querySnapshot => {
+			const result: DocumentData[] = [];
+			querySnapshot.forEach(doc => {
+				result.push({ ...doc.data(), id: doc.id });
+			});
+			setCategoryList(result as CategoryProps[]);
+		});
 	}, []);
+
+	if (isLoading) {
+		return <div className="text-3xl">Загрузка . . .</div>;
+	}
 
 	return (
 		<>
@@ -44,8 +47,8 @@ export const Dashboard: FC = () => {
 					</button>
 				</div>
 				<div className="flex flex-row space-x-8 ">
-					{categories.map(category => (
-						<Category key={category.id} {...category} taskList={taskList} />
+					{categoryList.map(category => (
+						<Category key={category.id} {...category} />
 					))}
 				</div>
 			</div>
