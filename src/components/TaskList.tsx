@@ -3,7 +3,6 @@ import { type FC } from 'react';
 import { Task, type TaskItem } from './Task';
 
 type TaskListProps = {
-	// categoryId: string;
 	taskList: TaskItem[];
 };
 

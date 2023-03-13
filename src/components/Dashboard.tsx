@@ -1,5 +1,6 @@
 import { collection, type DocumentData, limit, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { type FC,useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import { db } from '../firebase';
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
@@ -17,6 +18,8 @@ export const Dashboard: FC = () => {
 	const openModalHandler = () => {
 		dispatch(UIActions.openModal());
 	};
+
+	const onDragEnd = result => {};
 
 	useEffect(() => {
 		// Get categories once to set store state
@@ -38,7 +41,7 @@ export const Dashboard: FC = () => {
 	}
 
 	return (
-		<>
+		<DragDropContext onDragEnd={onDragEnd}>
 			<div className="container flex flex-col align-center">
 				<NewTask />
 				<div className="add-task mb-4">
@@ -52,6 +55,6 @@ export const Dashboard: FC = () => {
 					))}
 				</div>
 			</div>
-		</>
+		</DragDropContext>
 	);
 };
