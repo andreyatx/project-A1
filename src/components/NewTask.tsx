@@ -2,6 +2,7 @@ import { type ChangeEvent, type FC, type FormEvent, useState } from 'react';
 
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
+import { UIActions, UISelectors } from '../store/features/UI/UISlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Modal } from './Modal';
 
@@ -35,6 +36,8 @@ export const NewTask: FC = () => {
 		event.preventDefault();
 
 		dispatch(dashboardThunks.addTask(newTask));
+		setNewTask(initalValues);
+		dispatch(UIActions.closeModal());
 	};
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
