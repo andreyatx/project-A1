@@ -57,6 +57,7 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 								</li>
 								<li>
 									<button
+										draggable={false}
 										onClick={() => deleteHandler(task.categoryId, task)}
 										className="hover:bg-slate-400 text-red-600">
 										Удалить

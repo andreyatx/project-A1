@@ -1,14 +1,16 @@
 import { collection, type DocumentData, limit, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { type FC, useEffect, useState } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 
 import { db } from '../firebase';
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { UIActions } from '../store/features/UI/UISlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { moveItemInArray } from '../utils/moveItemInArray';
 import { Category, type CategoryProps } from './Category';
 import { NewTask } from './NewTask';
+import { type TaskItem } from './Task';
 
 export const Dashboard: FC = () => {
 	const { isLoading } = useAppSelector(dashboardSelectors.all);
@@ -19,7 +21,34 @@ export const Dashboard: FC = () => {
 		dispatch(UIActions.openModal());
 	};
 
-	const onDragEnd = result => {};
+	const onDragEndHandler = (result: DropResult) => {
+		const { destination, source } = result;
+
+		if (!destination) return;
+
+		if (destination.droppableId === source.droppableId && destination.index === source.index) {
+			return;
+		}
+
+		const categoryIndex = categoryList.findIndex(category => category.id === source.droppableId);
+		const category = categoryList[categoryIndex];
+
+		let newTaskArray: TaskItem[] = [];
+
+		if (category?.taskList) {
+			newTaskArray = [...category.taskList];
+		}
+
+		moveItemInArray(newTaskArray, source.index, destination.index);
+
+		if (category) {
+			category.taskList = newTaskArray;
+		}
+
+		const newCategoryList = [...categoryList];
+
+		setCategoryList(newCategoryList);
+	};
 
 	useEffect(() => {
 		// Get categories once to set store state
@@ -41,7 +70,7 @@ export const Dashboard: FC = () => {
 	}
 
 	return (
-		<DragDropContext onDragEnd={onDragEnd}>
+		<DragDropContext onDragEnd={onDragEndHandler}>
 			<div className="container flex flex-col align-center">
 				<NewTask />
 				<div className="add-task mb-4">
