@@ -30,24 +30,41 @@ export const Dashboard: FC = () => {
 			return;
 		}
 
-		const categoryIndex = categoryList.findIndex(category => category.id === source.droppableId);
-		const category = categoryList[categoryIndex];
+		const sourceCategoryIndex = categoryList.findIndex(category => category.id === source.droppableId);
+		const sourceCategory = categoryList[sourceCategoryIndex];
 
-		let newTaskArray: TaskItem[] = [];
+		const destinationCategoryIndex = categoryList.findIndex(category => category.id === destination.droppableId);
+		const destinationCategory = categoryList[destinationCategoryIndex];
 
-		if (category?.taskList) {
-			newTaskArray = [...category.taskList];
+		console.log('src', sourceCategoryIndex, 'dest', destinationCategoryIndex);
+
+		if (sourceCategoryIndex === destinationCategoryIndex) {
+			// Move in the same category
+			let newTaskArray: TaskItem[] = [];
+
+			newTaskArray = [...sourceCategory.taskList];
+
+			moveItemInArray(newTaskArray, source.index, destination.index);
+
+			sourceCategory.taskList = newTaskArray;
+
+			const newCategoryList = [...categoryList];
+
+			setCategoryList(newCategoryList);
+		} else {
+			// Move to a different category
+			const sourceTaskArray: TaskItem[] = [...sourceCategory.taskList];
+			const [movedItem] = sourceTaskArray.splice(source.index, 1);
+			sourceCategory.taskList = sourceTaskArray;
+
+			const destinationTaskArray: TaskItem[] = [...destinationCategory.taskList];
+
+			destinationTaskArray.splice(destination.index, 0, movedItem);
+			destinationCategory.taskList = destinationTaskArray;
+
+			const newCategoryList = [...categoryList];
+			setCategoryList(newCategoryList);
 		}
-
-		moveItemInArray(newTaskArray, source.index, destination.index);
-
-		if (category) {
-			category.taskList = newTaskArray;
-		}
-
-		const newCategoryList = [...categoryList];
-
-		setCategoryList(newCategoryList);
 	};
 
 	useEffect(() => {
