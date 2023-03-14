@@ -29,13 +29,18 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 
 	return (
 		<Draggable draggableId={task.taskId} index={index}>
-			{provided => {
+			{(provided, snapshot) => {
 				return (
 					<div
-						className="card w-80 h-24 bg-neutral rounded-sm flex flex-row p-2 mb-2"
+						className="card w-80 h-24 bg-neutral rounded-md flex flex-row p-2 mb-2"
 						{...provided.dragHandleProps}
 						{...provided.draggableProps}
-						ref={provided.innerRef}>
+						ref={provided.innerRef}
+						style={
+							snapshot.isDragging
+								? { ...provided.draggableProps.style, border: '1px solid white', backgroundColor: '#213547' }
+								: { ...provided.draggableProps.style }
+						}>
 						<div className="left-block flex flex-col">
 							<div className="mb-2">{task.title ?? 'Название задачи'}</div>
 
