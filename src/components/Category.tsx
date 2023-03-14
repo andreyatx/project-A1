@@ -47,7 +47,7 @@ export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) =
 			<Droppable droppableId={id}>
 				{(provided, snapshot) => (
 					<div
-						className="taskListContainer rounded-md w-max"
+						className="taskListContainer rounded-md w-max min-h-full"
 						ref={provided.innerRef}
 						{...provided.droppableProps}
 						style={
