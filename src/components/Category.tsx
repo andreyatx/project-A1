@@ -45,8 +45,16 @@ export const Category: FC<CategoryProps> = ({ iconName, title, taskList, id }) =
 				<CategoryActions />
 			</div>
 			<Droppable droppableId={id}>
-				{provided => (
-					<div className="taskListContainer" ref={provided.innerRef} {...provided.droppableProps}>
+				{(provided, snapshot) => (
+					<div
+						className="taskListContainer rounded-md w-max"
+						ref={provided.innerRef}
+						{...provided.droppableProps}
+						style={
+							snapshot.isDraggingOver
+								? { backgroundColor: '#213547', border: '2px solid #f9f9f9' }
+								: { transition: 'background-color 0.3s ease' }
+						}>
 						<TaskList taskList={taskList} />
 						{provided.placeholder}
 					</div>
