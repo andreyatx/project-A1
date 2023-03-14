@@ -36,8 +36,6 @@ export const Dashboard: FC = () => {
 		const destinationCategoryIndex = categoryList.findIndex(category => category.id === destination.droppableId);
 		const destinationCategory = categoryList[destinationCategoryIndex];
 
-		console.log('src', sourceCategoryIndex, 'dest', destinationCategoryIndex);
-
 		if (sourceCategoryIndex === destinationCategoryIndex) {
 			// Move in the same category
 			let newTaskArray: TaskItem[] = [];
@@ -65,6 +63,8 @@ export const Dashboard: FC = () => {
 			const newCategoryList = [...categoryList];
 			setCategoryList(newCategoryList);
 		}
+
+		dispatch(dashboardThunks.postCategoryList(categoryList));
 	};
 
 	useEffect(() => {
