@@ -2,7 +2,7 @@ import { type ChangeEvent, type FC, type FormEvent, useState } from 'react';
 
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
-import { UIActions, UISelectors } from '../store/features/UI/UISlice';
+import { UIActions } from '../store/features/UI/UISlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Modal } from './Modal';
 

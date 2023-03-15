@@ -16,7 +16,8 @@
 		"firebase": "9.17.1",
 		"react": "18.2.0",
 		"react-beautiful-dnd": "13.1.1",
-		"react-dom": "18.2.0"
+		"react-dom": "18.2.0",
+		"react-router-dom": "6.9.0"
 	},
 	"devDependencies": {
 		"@headlessui/react": "1.7.11",
