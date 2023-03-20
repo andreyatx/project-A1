@@ -2,15 +2,15 @@ import { collection, type DocumentData, limit, onSnapshot, orderBy, query } from
 import { type FC, useEffect, useState } from 'react';
 import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 
+import { Category, type CategoryProps } from '../components/Category';
+import { NewTask } from '../components/NewTask';
+import { type TaskItem } from '../components/Task';
 import { db } from '../firebase';
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { UIActions } from '../store/features/UI/UISlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { moveItemInArray } from '../utils/moveItemInArray';
-import { Category, type CategoryProps } from './Category';
-import { NewTask } from './NewTask';
-import { type TaskItem } from './Task';
 
 export const Dashboard: FC = () => {
 	const { isLoading } = useAppSelector(dashboardSelectors.all);

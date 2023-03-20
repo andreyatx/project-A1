@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Paths } from '../main';
 
+//** Routes available only when logged in */
 export const ProtectedRoutes: FC = () => {
 	const auth = getAuth();
 	const navigate = useNavigate();
@@ -32,7 +33,7 @@ export const ProtectedRoutes: FC = () => {
 		return () => AuthCheck();
 	}, [auth]);
 
-	if (loading) return <p>loading ...</p>;
+	if (loading) return <p>Загрузка ...</p>;
 
 	return (
 		<>

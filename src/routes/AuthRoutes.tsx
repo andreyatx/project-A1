@@ -1,24 +1,29 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-import { auth } from '../firebase';
 import { Paths } from '../main';
-import { authActions } from '../store/features/auth/authSlice';
-import { useAppDispatch } from '../store/hooks';
 
+//** Routes available only when logged out */
 export const AuthRoutes = () => {
-	const dispatch = useAppDispatch();
-	onAuthStateChanged(auth, user => {
-		if (user) {
-			console.log(user);
+	const auth = getAuth();
+	const navigate = useNavigate();
+	const [loading, setLoading] = useState(false);
 
-			// dispatch(authActions.setUser(user));
-		} else {
-			console.log(null);
-			// dispatch(authActions.setUser(null));
-		}
-	});
+	useEffect(() => {
+		const AuthCheck = onAuthStateChanged(auth, user => {
+			if (user) {
+				setLoading(false);
+				navigate(Paths.Dashboard);
+			} else {
+				console.log('already in system');
+			}
+		});
+
+		return () => AuthCheck();
+	}, [auth]);
+
+	if (loading) return <p>Загрузка ...</p>;
 	return (
 		<>
 			<Outlet />

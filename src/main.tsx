@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Dashboard } from './components/Dashboard';
+import { Dashboard } from './pages/Dashboard';
 import { ErrorPage } from './pages/ErrorPage';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
