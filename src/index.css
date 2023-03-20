@@ -7,7 +7,7 @@
 	line-height: 1.5;
 	font-weight: 400;
 	color-scheme: light dark;
-	color: #fff;
+	color: #f8fafc;
 	background-color: #1e293b;
 	font-synthesis: none;
 	text-rendering: optimizelegibility;
@@ -18,12 +18,8 @@
 
 a {
 	font-weight: 500;
-	color: #646cff;
+	color: red;
 	text-decoration: inherit;
-}
-
-a:hover {
-	color: #535bf2;
 }
 
 body {
@@ -53,8 +49,9 @@ h2 {
 	border: none;
 }
 
+.btn,
 .label-text {
-	color: white;
+	color: #f8fafc;
 }
 
 @media (prefers-color-scheme: light) {

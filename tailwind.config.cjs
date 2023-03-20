@@ -5,7 +5,17 @@ module.exports = {
 		extend: {},
 	},
 	daisyui: {
-		themes: ['light'],
+		themes: [
+			{
+				mytheme: {
+					primary: '#146C94',
+
+					secondary: '#778DA9',
+
+					neutral: '#3D4451',
+				},
+			},
+		],
 	},
 	plugins: [require('daisyui')],
 };

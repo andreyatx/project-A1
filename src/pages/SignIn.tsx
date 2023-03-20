@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 import { Paths } from '../main';
@@ -17,6 +17,8 @@ export const SignIn = () => {
 		formState: { errors },
 	} = useForm<SignInData>({ mode: 'onChange' });
 
+	const navigate = useNavigate();
+
 	const onSubmit = ({ email, password }: SignInData) => {
 		console.log(email, password);
 
@@ -24,6 +26,7 @@ export const SignIn = () => {
 			.then(userCredential => {
 				const user = userCredential.user;
 				console.log(user);
+				navigate(Paths.Dashboard);
 			})
 			.catch(error => {
 				const errorCode = error.code;
@@ -38,11 +41,11 @@ export const SignIn = () => {
 		<div className="w-full h-screen flex justify-center items-center ">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="min-w-min w-1/5 bg-neutral flex flex-col p-4 space-y-4 rounded-lg shadow-2xl shadow-black">
+				className="min-w-min w-72 bg-neutral flex flex-col p-4 space-y-4 rounded-lg shadow-2xl shadow-black lg:w-1/5">
 				<h2 className="mb-4">Вход</h2>
 				<div>
 					<label className="label">
-						<span className="label-text text-lg">Логин</span>
+						<span className="label-text text-lg">Почта</span>
 					</label>
 					<input
 						{...register('email', {

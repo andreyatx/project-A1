@@ -91,7 +91,7 @@ export const Dashboard: FC = () => {
 			<div className="container flex flex-col align-center">
 				<NewTask />
 				<div className="add-task mb-4">
-					<button onClick={openModalHandler} className="btn">
+					<button onClick={openModalHandler} className="btn btn-primary">
 						Создать задачу
 					</button>
 				</div>

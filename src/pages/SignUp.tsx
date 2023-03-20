@@ -40,7 +40,7 @@ export const SignUp = () => {
 		<div className="w-full h-screen flex justify-center items-center ">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="min-w-min w-1/5 bg-neutral flex flex-col p-4 space-y-4 rounded-lg shadow-2xl shadow-black max-sm:w-full">
+				className="min-w-min w-72  bg-neutral flex flex-col p-4 space-y-4 rounded-lg shadow-2xl shadow-black max-sm:w-full">
 				<h2 className="mb-4">Регистрация</h2>
 				<div>
 					<label className="label">
