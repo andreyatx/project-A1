@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { type FC, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import { Paths } from '../main';
+import { Paths } from './router';
 
 //** Routes available only when logged in */
 export const ProtectedRoutes: FC = () => {
@@ -39,11 +39,12 @@ export const ProtectedRoutes: FC = () => {
 		<>
 			<div className="navbar bg-neutral">
 				<div className="navbar-start">
-					<a className="btn btn-ghost normal-case text-xl">Task Manager</a>
+					<a className="btn btn-ghost normal-case text-xl hidden sm:flex">Task Manager</a>
 				</div>
 
 				<div className="navbar-end">
-					<button onClick={logoutHandler} className="btn btn-primary">
+					<button className="btn btn-primary mr-2">Мой профиль</button>
+					<button onClick={logoutHandler} className="btn btn-secondary">
 						Выйти
 					</button>
 				</div>

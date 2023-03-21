@@ -46,7 +46,7 @@ export const Modal: FC<ModalProps> = ({ children }) => {
 									<button
 										tabIndex={999}
 										onClick={closeModalHandler}
-										className="btn btn-square btn-sm btn-outline bg-slate-800 flex ml-auto">
+										className="btn btn-square btn-sm btn-outline flex ml-auto">
 										<XMarkIcon className="h-6 w-6 text-white" />
 									</button>
 									{children}

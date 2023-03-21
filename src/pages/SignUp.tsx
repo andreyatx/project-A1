@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { auth } from '../firebase';
-import { Paths } from '../main';
+import { Paths } from '../routes/router';
 
 type SignUpData = {
 	email: string;

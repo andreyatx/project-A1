@@ -1,7 +1,7 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Paths } from '../main';
+import { Paths } from '../routes/router';
 
 export const WelcomePage: FC = () => {
 	return (

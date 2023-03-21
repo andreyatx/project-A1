@@ -68,13 +68,13 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 								</button>
 								<ul className="dropdown-content menu shadow bg-neutral rounded-box mt-6">
 									<li>
-										<button className="hover:bg-slate-400">Редактировать</button>
+										<button className="hover:bg-slate-400 font-bold">Редактировать</button>
 									</li>
 									<li>
 										<button
 											draggable={false}
 											onClick={() => deleteHandler(task.categoryId, task)}
-											className="hover:bg-slate-400 text-red-600">
+											className="hover:bg-slate-400 text-red-500 font-bold">
 											Удалить
 										</button>
 									</li>

@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import { Paths } from '../main';
+import { Paths } from './router';
 
 //** Routes available only when logged out */
 export const AuthRoutes = () => {
@@ -24,9 +24,5 @@ export const AuthRoutes = () => {
 	}, [auth]);
 
 	if (loading) return <p>Загрузка ...</p>;
-	return (
-		<>
-			<Outlet />
-		</>
-	);
+	return <Outlet />;
 };
