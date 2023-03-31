@@ -98,7 +98,7 @@ export const SignUp = () => {
 					/>
 					{errors.passwordCheck && <span className="text-error">{errors.passwordCheck.message}</span>}
 				</div>
-				<button className="btn bg-primary">Войти</button>
+				<button className="btn bg-primary">Зарегистрироваться</button>
 				<Link className="text-white self-center" to={Paths.SignIn}>
 					Уже зарегистрированы? Войти
 				</Link>
