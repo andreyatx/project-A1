@@ -84,34 +84,6 @@ export const getTaskById = createAsyncThunk('dashboard/get-task-list', async (ta
 	return result as TaskItem;
 });
 
-// export const getTaskList = createAsyncThunk('dashboard/get-task-list', async () => {
-// 	const taskListQuery = query(collection(db, 'TASK_LIST'));
-// 	const data = await getDocs(taskListQuery);
-
-// 	const result: DocumentData[] = [];
-
-// 	data.forEach(doc => {
-// 		result.push({ ...doc.data(), id: doc.id });
-// 	});
-
-// 	// All tasks array
-// 	return result as TaskItem[];
-// });
-
-// export const postTaskList = createAsyncThunk('dashboard/post-task-list', async () => {
-// 	const taskListQuery = query(collection(db, 'TASK_LIST'));
-// 	const data = await getDocs(taskListQuery);
-
-// 	const result: DocumentData[] = [];
-
-// 	data.forEach(doc => {
-// 		result.push({ ...doc.data(), id: doc.id });
-// 	});
-
-// 	// All tasks array
-// 	return result as TaskItem[];
-// });
-
 export const getCategoryList = createAsyncThunk('dashboard/get-category-list', async () => {
 	const categoryListQuery = query(collection(db, 'CATEGORY_LIST'), orderBy('order'), limit(99));
 	const data = await getDocs(categoryListQuery);
@@ -137,7 +109,6 @@ export const postCategoryList = createAsyncThunk('dashboard/post-category-list',
 			taskList: updatedList,
 		});
 	});
-	console.log('postcatlist', data);
 });
 
 export const dashboardThunks = {

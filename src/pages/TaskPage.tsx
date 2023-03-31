@@ -112,7 +112,13 @@ export const TaskPage: FC = () => {
 							<label className="label">
 								<span className="label-text">Приоритет</span>
 							</label>
-							<select tabIndex={4} className="select w-full" required name="priority" onChange={handleInputChange}>
+							<select
+								defaultValue={task.priority}
+								tabIndex={4}
+								className="select w-full"
+								required
+								name="priority"
+								onChange={handleInputChange}>
 								<option value={Priority.Low}>Низкий</option>
 								<option value={Priority.Medium}>Средний</option>
 								<option value={Priority.High}>Высокий</option>
