@@ -8,7 +8,7 @@ import { TaskPage } from '../pages/TaskPage';
 import { WelcomePage } from '../pages/WelcomePage';
 import { AuthRoutes } from './AuthRoutes';
 import { ProtectedRoutes } from './ProtectedRoutes';
-import { Root } from './Root';
+import { Root } from './root';
 
 export enum Paths {
 	Home = '/',

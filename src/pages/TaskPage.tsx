@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Priority } from '../components/NewTask';
 import { type TaskItem } from '../components/Task';
 import { db } from '../firebase';
+import { Paths } from '../routes/router';
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -49,7 +50,7 @@ export const TaskPage: FC = () => {
 			// dispatch(dashboardThunks.deleteTask({ categoryId: task.categoryId, task: sourceTask }));
 		}
 
-		// navigate(Paths.Dashboard);
+		navigate(Paths.Dashboard);
 	};
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
