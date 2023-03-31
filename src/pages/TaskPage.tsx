@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Priority } from '../components/NewTask';
 import { type TaskItem } from '../components/Task';
 import { db } from '../firebase';
-import { Paths } from '../routes/router';
 import { dashboardSelectors } from '../store/features/dashboard/dashboardSlice';
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -13,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 export const TaskPage: FC = () => {
 	const navigate = useNavigate();
 	const [task, setTask] = useState<TaskItem>();
+	const [sourceTask, setSourceTask] = useState<TaskItem>();
 	const { categories } = useAppSelector(dashboardSelectors.all);
 
 	const { categoryid, taskid } = useParams();
@@ -23,7 +23,7 @@ export const TaskPage: FC = () => {
 		const data = await getDocs(taskListQuery);
 		const tasks: DocumentData[] = [];
 		data.forEach(doc => {
-			tasks.push({ ...doc.data(), id: doc.id, categoryId: categoryid });
+			tasks.push({ ...doc.data(), taskId: doc.id, categoryId: categoryid });
 		});
 		const [result] = tasks.filter(task => task.taskId === taskid);
 		// All tasks array
@@ -37,18 +37,19 @@ export const TaskPage: FC = () => {
 	useEffect(() => {
 		fetchTaskById(categoryid, taskid).then(task => {
 			setTask(task);
+			setSourceTask(task);
 		});
 	}, [categories]);
 
 	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		if (task) {
-			dispatch(dashboardThunks.updateTask(task));
-			dispatch(dashboardThunks.deleteTask({ categoryId: task.categoryId, task }));
+		if (task && sourceTask) {
+			dispatch(dashboardThunks.updateTask({ oldTask: sourceTask, newTask: task }));
+			// dispatch(dashboardThunks.deleteTask({ categoryId: task.categoryId, task: sourceTask }));
 		}
 
-		navigate(Paths.Dashboard);
+		// navigate(Paths.Dashboard);
 	};
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

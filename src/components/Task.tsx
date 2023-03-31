@@ -13,7 +13,6 @@ export type TaskItem = {
 	title: string;
 	description: string;
 	priority: string;
-	tags: string;
 	avatar?: string;
 };
 

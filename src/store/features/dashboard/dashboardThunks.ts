@@ -22,50 +22,56 @@ import { type TaskItem } from './../../../components/Task';
 
 type DeleteTaskRequest = {
 	categoryId: string;
-	task: TaskItem;
+	task: TaskItem | undefined;
 };
 
 export type UpdateTaskRequest = {
-	taskId: string;
-	title: string;
-	description: string;
-	categoryId: string;
-	priority: string;
+	oldTask: TaskItem;
+	newTask: TaskItem;
 };
 
 export const addTask = createAsyncThunk('dashboard/add-task', async (data: NewTaskProps) => {
 	const TASK_LIST_REF = doc(db, 'CATEGORY_LIST', data.categoryId);
 	const taskId = nanoid(6);
 	const ALL_TASKS = doc(db, 'TASK_LIST', taskId);
+	const timestampValue = Timestamp.now().toDate().toISOString();
 
 	await updateDoc(TASK_LIST_REF, {
-		taskList: arrayUnion({ ...data, taskId, timestamp: Timestamp.now().toDate().toISOString() }),
+		taskList: arrayUnion({ ...data, taskId, timestamp: timestampValue }),
 	});
 
-	await setDoc(ALL_TASKS, { ...data, taskId, timestamp: Timestamp.now().toDate().toISOString() });
+	await setDoc(ALL_TASKS, { ...data, taskId, timestamp: timestampValue });
 });
 
 export const updateTask = createAsyncThunk('dashboard/update-task', async (data: UpdateTaskRequest) => {
-	const TASK_LIST_REF = doc(db, 'CATEGORY_LIST', data.categoryId);
+	const TASK_LIST_REF = doc(db, 'CATEGORY_LIST', data.oldTask.categoryId);
 
-	const ALL_TASKS = doc(db, 'TASK_LIST', data.taskId);
+	const ALL_TASKS = doc(db, 'TASK_LIST', data.oldTask.taskId);
+	//2023-03-31T15:03:54.713Z
+	console.log('old', data.oldTask);
+	console.log('new', data.newTask);
 
 	await updateDoc(TASK_LIST_REF, {
-		taskList: arrayUnion({ ...data }),
+		taskList: arrayUnion({ ...data.newTask }),
+	});
+	await updateDoc(TASK_LIST_REF, {
+		taskList: arrayRemove(data.oldTask),
 	});
 
-	await setDoc(ALL_TASKS, { ...data });
+	await setDoc(ALL_TASKS, { ...data.newTask });
 });
 
 export const deleteTask = createAsyncThunk('dashboard/delete-task', async (data: DeleteTaskRequest) => {
 	const TASK_LIST_REF = doc(db, 'CATEGORY_LIST', data.categoryId);
-	const TASK_REF = doc(db, 'TASK_LIST', data.task.taskId);
+	if (data.task) {
+		const TASK_REF = doc(db, 'TASK_LIST', data.task.taskId);
 
-	await updateDoc(TASK_LIST_REF, {
-		taskList: arrayRemove(data.task),
-	});
+		await updateDoc(TASK_LIST_REF, {
+			taskList: arrayRemove(data.task),
+		});
 
-	await deleteDoc(TASK_REF);
+		await deleteDoc(TASK_REF);
+	}
 });
 
 export const getTaskById = createAsyncThunk('dashboard/get-task-list', async (taskid: string | undefined) => {
