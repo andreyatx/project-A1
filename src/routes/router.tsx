@@ -15,7 +15,7 @@ export enum Paths {
 	SignIn = '/sign-in',
 	SignUp = '/sign-up',
 	Dashboard = '/dashboard',
-	Task = '/task',
+	Task = '/category/:categoryid/task/:taskid',
 }
 
 export const router = createBrowserRouter([

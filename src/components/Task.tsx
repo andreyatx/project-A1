@@ -1,6 +1,7 @@
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
 import { type FC } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 
 import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
 import { useAppDispatch } from '../store/hooks';
@@ -26,6 +27,7 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 	const deleteHandler = (categoryId: string, task: TaskItem) => {
 		dispatch(dashboardThunks.deleteTask({ categoryId, task }));
 	};
+	const navigate = useNavigate();
 
 	return (
 		<Draggable draggableId={task.taskId} index={index}>
@@ -42,11 +44,14 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 								: { ...provided.draggableProps.style }
 						}>
 						<div className="left-block flex flex-col">
-							<div className="mb-2">{task.title ?? 'Название задачи'}</div>
+							<div
+								className="mb-2 hover:cursor-pointer hover:underline"
+								onClick={() => navigate(`/category/${task.categoryId}/task/${task.taskId}`)}>
+								{task.title ?? 'Название задачи'}
+							</div>
 
 							<div className="flex flex-row mt-auto">
 								<div className="text-sm text-slate-300">Приоритет {task.priority ?? 'Priority'}</div>
-								<div className="text-sm text-slate-300 ml-2">{task.tags ?? 'Tags'}</div>
 							</div>
 						</div>
 
@@ -61,14 +66,16 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 									cursor: 'auto',
 								}}
 								className="flex dropdown dropdown-end">
-								<button
-									onClick={() => console.log('123')}
-									className="max-w-fit bg-transparent rounded-md focus:bg-slate-400 hover:bg-slate-400 ml-2">
+								<button className="max-w-fit bg-transparent rounded-md focus:bg-slate-400 hover:bg-slate-400 ml-2">
 									<EllipsisHorizontalIcon className="h-6 w-6 text-white self-center" />
 								</button>
 								<ul className="dropdown-content menu shadow bg-neutral rounded-box mt-6">
 									<li>
-										<button className="hover:bg-slate-400 font-bold">Редактировать</button>
+										<button
+											onClick={() => navigate(`/category/${task.categoryId}/task/${task.taskId}`)}
+											className="hover:bg-slate-400 font-bold">
+											Редактировать
+										</button>
 									</li>
 									<li>
 										<button

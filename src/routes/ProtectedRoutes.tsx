@@ -1,13 +1,16 @@
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { type FC, useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
+import { dashboardThunks } from '../store/features/dashboard/dashboardThunks';
+import { useAppDispatch } from '../store/hooks';
 import { Paths } from './router';
 
 //** Routes available only when logged in */
 export const ProtectedRoutes: FC = () => {
 	const auth = getAuth();
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [loading, setLoading] = useState(false);
 
 	const logoutHandler = () => {
@@ -24,6 +27,8 @@ export const ProtectedRoutes: FC = () => {
 		const AuthCheck = onAuthStateChanged(auth, user => {
 			if (user) {
 				setLoading(false);
+				// Get categories once to set store state
+				dispatch(dashboardThunks.getCategoryList());
 			} else {
 				console.log('unauthorized');
 				navigate(Paths.SignIn);
@@ -39,7 +44,9 @@ export const ProtectedRoutes: FC = () => {
 		<>
 			<div className="navbar bg-neutral">
 				<div className="navbar-start">
-					<a className="btn btn-ghost normal-case text-xl hidden sm:flex">Task Manager</a>
+					<Link to={Paths.Home} className="btn btn-ghost normal-case text-xl hidden sm:flex">
+						Task Manager
+					</Link>
 				</div>
 
 				<div className="navbar-end">

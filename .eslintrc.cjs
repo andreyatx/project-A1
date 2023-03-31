@@ -11,7 +11,7 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['react', '@typescript-eslint', 'simple-import-sort'],
+	plugins: ['react', '@typescript-eslint', 'simple-import-sort', 'react-hooks'],
 	rules: {
 		indent: ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
@@ -20,6 +20,7 @@ module.exports = {
 		'max-len': ['error', 120, 2, { ignoreStrings: true }],
 		'simple-import-sort/exports': 'warn',
 		'simple-import-sort/imports': 'warn',
+		'react-hooks/rules-of-hooks': 'error',
 		'no-duplicate-imports': 'error',
 		'eol-last': ['warn', 'always'],
 		'@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],

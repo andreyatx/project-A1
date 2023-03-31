@@ -10,14 +10,14 @@ export type NewTaskProps = {
 	title: string;
 	description: string;
 	categoryId: string;
-	priority: number;
+	priority: string;
 };
 
-enum Priority {
-	Low = 0,
-	Medium = 1,
-	High = 2,
-}
+export const Priority = {
+	Low: 'Низкий',
+	Medium: 'Средний',
+	High: 'Высокий',
+};
 
 export const NewTask: FC = () => {
 	const { categories } = useAppSelector(dashboardSelectors.all);
@@ -26,7 +26,7 @@ export const NewTask: FC = () => {
 		title: '',
 		description: '',
 		categoryId: categories[0].id, //First category id
-		priority: 0,
+		priority: Priority.Low,
 	};
 
 	const dispatch = useAppDispatch();

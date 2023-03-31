@@ -20,12 +20,8 @@ export const SignIn = () => {
 	const navigate = useNavigate();
 
 	const onSubmit = ({ email, password }: SignInData) => {
-		console.log(email, password);
-
 		signInWithEmailAndPassword(auth, email, password)
-			.then(userCredential => {
-				const user = userCredential.user;
-				console.log(user);
+			.then(() => {
 				navigate(Paths.Dashboard);
 			})
 			.catch(error => {

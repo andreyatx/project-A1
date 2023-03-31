@@ -20,20 +20,13 @@ export const SignUp = () => {
 	} = useForm<SignUpData>({ mode: 'onChange' });
 
 	const onSubmit = ({ email, password }: SignUpData) => {
-		console.log(email, password);
+		createUserWithEmailAndPassword(auth, email, password).catch(error => {
+			const errorCode = error.code;
+			console.log(errorCode);
 
-		createUserWithEmailAndPassword(auth, email, password)
-			.then(userCredential => {
-				const user = userCredential.user;
-				console.log(user);
-			})
-			.catch(error => {
-				const errorCode = error.code;
-				console.log(errorCode);
-
-				const errorMessage = error.message;
-				console.log(errorMessage);
-			});
+			const errorMessage = error.message;
+			console.log(errorMessage);
+		});
 	};
 
 	return (

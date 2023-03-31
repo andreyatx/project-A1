@@ -68,9 +68,6 @@ export const Dashboard: FC = () => {
 	};
 
 	useEffect(() => {
-		// Get categories once to set store state
-		dispatch(dashboardThunks.getCategoryList());
-
 		// Get categories real-time updates
 		const categoryListQuery = query(collection(db, 'CATEGORY_LIST'), orderBy('order'), limit(99));
 		onSnapshot(categoryListQuery, querySnapshot => {
@@ -83,7 +80,7 @@ export const Dashboard: FC = () => {
 	}, []);
 
 	if (isLoading) {
-		return <div className="text-3xl">Загрузка . . .</div>;
+		return <div className="mx-auto spinner"></div>;
 	}
 
 	return (
