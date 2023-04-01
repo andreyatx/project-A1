@@ -33,7 +33,7 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 			{(provided, snapshot) => {
 				return (
 					<div
-						className="card w-80 h-24 bg-neutral rounded-md flex flex-row p-2 mb-2"
+						className="card w-80 h-28 bg-neutral rounded-md flex flex-row p-2 mb-2"
 						{...provided.dragHandleProps}
 						{...provided.draggableProps}
 						ref={provided.innerRef}
@@ -43,11 +43,11 @@ export const Task: FC<TaskProps> = ({ task, index }) => {
 								: { ...provided.draggableProps.style }
 						}>
 						<div className="left-block flex flex-col">
-							<div
-								className="mb-2 hover:cursor-pointer hover:underline"
+							<span
+								className="mb-2 break-words w-64 hover:cursor-pointer hover:underline"
 								onClick={() => navigate(`/category/${task.categoryId}/task/${task.taskId}`)}>
 								{task.title ?? 'Название задачи'}
-							</div>
+							</span>
 
 							<div className="flex flex-row mt-auto">
 								<div className="text-sm text-slate-300">Приоритет {task.priority ?? 'Priority'}</div>

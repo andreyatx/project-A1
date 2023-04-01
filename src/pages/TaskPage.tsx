@@ -45,9 +45,13 @@ export const TaskPage: FC = () => {
 	const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		if (task && sourceTask) {
+		if (task?.title === sourceTask?.title && task?.description === sourceTask?.description) {
+			navigate(Paths.Dashboard);
+			return;
+		}
+
+		if (task && sourceTask && (task.title !== sourceTask.title || task.description !== sourceTask.description)) {
 			dispatch(dashboardThunks.updateTask({ oldTask: sourceTask, newTask: task }));
-			// dispatch(dashboardThunks.deleteTask({ categoryId: task.categoryId, task: sourceTask }));
 		}
 
 		navigate(Paths.Dashboard);
@@ -78,6 +82,7 @@ export const TaskPage: FC = () => {
 							value={task.title}
 							required
 							name="title"
+							maxLength={60}
 							onChange={handleInputChange}
 						/>
 						<textarea
@@ -85,6 +90,7 @@ export const TaskPage: FC = () => {
 							placeholder="Описание (необязательно)"
 							className="textarea textarea-md w-full "
 							name="description"
+							maxLength={500}
 							value={task.description}
 							onChange={handleInputChange}
 						/>

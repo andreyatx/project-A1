@@ -61,6 +61,7 @@ export const NewTask: FC = () => {
 					required
 					value={newTask.title}
 					name="title"
+					maxLength={60}
 					onChange={handleInputChange}
 				/>
 				<textarea
@@ -68,6 +69,7 @@ export const NewTask: FC = () => {
 					placeholder="Описание (необязательно)"
 					className="textarea textarea-md w-full "
 					value={newTask.description}
+					maxLength={500}
 					name="description"
 					onChange={handleInputChange}
 				/>
