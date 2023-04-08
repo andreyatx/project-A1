@@ -85,14 +85,14 @@ export const Dashboard: FC = () => {
 
 	return (
 		<DragDropContext onDragEnd={onDragEndHandler}>
-			<div className="container flex flex-col align-center">
+			<div className="container flex flex-col align-center mx-auto max-w-fit">
 				<NewTask />
 				<div className="add-task mb-4">
-					<button onClick={openModalHandler} className="btn btn-primary">
+					<button onClick={openModalHandler} className="btn btn-primary mt-2">
 						Создать задачу
 					</button>
 				</div>
-				<div className="flex flex-row space-x-8 ">
+				<div className="flex flex-row space-x-8 categoryList">
 					{categoryList.map(category => (
 						<Category key={category.id} {...category} />
 					))}

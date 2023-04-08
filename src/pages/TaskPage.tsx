@@ -127,9 +127,9 @@ export const TaskPage: FC = () => {
 								required
 								name="priority"
 								onChange={handleInputChange}>
-								<option value={Priority.Low}>Низкий</option>
-								<option value={Priority.Medium}>Средний</option>
-								<option value={Priority.High}>Высокий</option>
+								<option value={Priority.Low}>низкий</option>
+								<option value={Priority.Medium}>средний</option>
+								<option value={Priority.High}>высокий</option>
 							</select>
 						</div>
 						<div className="flex justify-end">

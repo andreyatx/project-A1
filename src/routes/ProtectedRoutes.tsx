@@ -50,7 +50,9 @@ export const ProtectedRoutes: FC = () => {
 				</div>
 
 				<div className="navbar-end">
-					<button className="btn btn-primary mr-2">Мой профиль</button>
+					<button onClick={() => navigate(Paths.Profile)} className="btn btn-primary mr-2">
+						Мой профиль
+					</button>
 					<button onClick={logoutHandler} className="btn btn-secondary">
 						Выйти
 					</button>

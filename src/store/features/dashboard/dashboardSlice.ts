@@ -14,19 +14,19 @@ const initialState = {
 	categories: [
 		{
 			id: '1',
-			title: 'Backlog',
+			title: 'Не распределено',
 			iconName: IconNames.Backlog,
 			taskList: [],
 		},
 		{
 			id: '2',
-			title: 'In Progress',
+			title: 'В процессе',
 			iconName: IconNames.InProgress,
 			taskList: [],
 		},
 		{
 			id: '3',
-			title: 'Done',
+			title: 'Выполнено',
 			iconName: IconNames.Done,
 			taskList: [],
 		},

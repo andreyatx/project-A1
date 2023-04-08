@@ -95,3 +95,9 @@ h3 {
 		transform: rotate(360deg);
 	}
 }
+
+@media (max-width: 720px) {
+	.categoryList {
+		overflow-x: scroll;
+	}
+}

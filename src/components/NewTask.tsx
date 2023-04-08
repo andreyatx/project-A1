@@ -14,9 +14,9 @@ export type NewTaskProps = {
 };
 
 export const Priority = {
-	Low: 'Низкий',
-	Medium: 'Средний',
-	High: 'Высокий',
+	Low: 'низкий',
+	Medium: 'средний',
+	High: 'высокий',
 };
 
 export const NewTask: FC = () => {
@@ -106,9 +106,9 @@ export const NewTask: FC = () => {
 						value={newTask.priority}
 						onChange={handleInputChange}
 						name="priority">
-						<option value={Priority.Low}>Низкий</option>
-						<option value={Priority.Medium}>Средний</option>
-						<option value={Priority.High}>Высокий</option>
+						<option value={Priority.Low}>низкий</option>
+						<option value={Priority.Medium}>средний</option>
+						<option value={Priority.High}>высокий</option>
 					</select>
 				</div>
 
