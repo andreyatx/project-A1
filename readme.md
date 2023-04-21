@@ -17,7 +17,7 @@
 
 * [React](https://react.dev/) - javascript библиотека для разработки пользовательских интерфейсов
 * [typescript](https://www.typescriptlang.org/) - надстройка над javascript, добавляющая строгую типизацию
-* [redux-toolkit](https://redux-toolkit.js.org/)- набор инструментов для облегчения работы с менеджер состояний redux
+* [redux-toolkit](https://redux-toolkit.js.org/)- набор инструментов для облегчения работы с менеджером состояний redux
 * [postcss](https://postcss.org/) - инструмент для трансформирования css-стилей с помощью javascript
 * [tailwind](https://tailwindcss.com/) - CSS-фреймворк,  позволяет создавать UI при помощи набора готовых классов (в данном проекте tailwind установлен как плагин для postcss)
 * [daisyUI](https://daisyui.com/) - библиотека готовых компонентов, использующая tailwind
